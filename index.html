@@ -7,57 +7,63 @@
 	<title>Calculator</title>
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="main.css">
 
-	<!--[if lt IE 9]>
-	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
-	<![endif]-->
 
 </head>
 <body>
 
 	<div class="wrapper">
-		<h1>Alcohol Calculator</h1>
+		<h1>Cost per standard drink</h1>
 
-		<hr>
-
-		<h2>Cost per standard drink</h2>
 		<form id="drink_cost">
 
 			<input type="radio" name="type" id="type_spirit" value="spirit" checked>
 			<label for="type_spirit">Spirit</label>&nbsp;&nbsp;&nbsp;
+
 			<input type="radio" name="type" id="type_beer" value="beer">
 			<label for="type_beer">Beer</label>&nbsp;&nbsp;&nbsp;
+
 			<input type="radio" name="type" id="type_wine" value="wine">
 			<label for="type_wine">Wine</label>
+
 
 			<label for="proof" class="label_head">Proof</label>
 			<input type="number" min="0" max="200" maxlength="3" name="proof" id="proof" value="80">
 
-			<label for="volume" class="label_head">Volume (mL)</label>
+
+			<label for="volume" class="label_head">Volume</label>
 			<input type="number" min="1" maxlength="4" name="volume" id="volume" value="750">
 
-			<label for="cost" class="label_head">Cost</label>
+			<input type="radio" name="units" id="vol_ml" value="mL" checked>
+			<label for="vol_ml">mL</label>&nbsp;&nbsp;&nbsp;
+
+			<input type="radio" name="units" id="vol_oz" value="oz">
+			<label for="vol_oz">ounces</label>&nbsp;&nbsp;&nbsp;
+
+
+			<label for="cost" class="label_head">Cost ($)</label>
 			<input type="text" name="cost" id="cost">
 
 			<br>
 			<input type="submit" class="btn btn-primary" value="Calc">
 		</form>
+
 		<h3>Results <span class="clear_results" data-rel="drink_cost_rows">clear</span></h3>
+
 		<table class="table">
+
 			<thead>
 				<tr>
-					<th>Proof</th>
+					<th>Percent</th>
 					<th>Volume</th>
 					<th>Cost</th>
 					<th>Cost per drink</th>
 				</tr>
 			</thead>
-			<tbody id="drink_cost_rows">
 
-			</tbody>
+			<tbody id="drink_cost_rows"></tbody>
+
 		</table>
 	</div>
 
