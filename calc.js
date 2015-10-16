@@ -3,19 +3,11 @@
 jQuery(document).ready( function ($) {
 	'use strict';
 
-	$('.clear_results').click(function () {
-		$('#' + $(this).attr('data-rel')).html('');
+	$('.js-clear-results').click(function () {
+		$('#' + $(this).attr('data-rel')).find('.calc-row').remove();
+		$('#js-no-results').show();
 	});
 
-	$('input[name=type]').change(function () {
-
-		$('[for="proof"]').text(
-			$(this).attr('id') === 'type_spirit' ?
-				'Proof' :
-				'ABV %'
-		);
-
-	});
 
 	$('#drink_cost').submit(function (e) {
 		e.preventDefault();
@@ -23,22 +15,22 @@ jQuery(document).ready( function ($) {
 		// Cached selectors
 
 		var thisForm = $(this);
-		var percentEl = $('#proof');
-		var volumeEl = $('#volume');
-		var costEl = $('#cost');
+		var percentEl = $('[name="alc-content"]');
+		var volumeEl = $('[name="volume"]');
+		var costEl = $('[name="cost"]');
 
 		var percent = parseInt(percentEl.val(), 10);
-		var type = thisForm.find('[name="type"]:checked').val();
+		var type = thisForm.find('[name="alc-type"]:checked').val();
 
 		if (!percent) {
-			alert('Need a ' + $('[for="proof"]').text());
+			alert('Need ' + $('[for="proof"] .label-text').text());
 			return;
 		}
 
 		// Cost calc below expects percent
 		// Converts proof to percent
 
-		if (type === 'spirit') {
+		if (type === 'proof') {
 			percent = percent / 2;
 		}
 
@@ -46,7 +38,7 @@ jQuery(document).ready( function ($) {
 		var units = thisForm.find('[name="units"]:checked').val();
 
 		if (!volume) {
-			alert('Need a volume');
+			alert('Need ' + $('[for="volume"] .label-text').text());
 			return;
 		}
 
@@ -60,24 +52,22 @@ jQuery(document).ready( function ($) {
 		var cost = costEl.val();
 
 		if (!cost) {
-			alert('Need a cost');
+			alert('Need ' + $('[for="cost"] .label-text').text());
 			return;
 		}
 
 		var costPerDrink = calcDrinkCost(percent, volume, cost);
 
-		$('#drink_cost_rows')
+		$('#js-no-results').hide();
+
+		$('#drink-calcs')
 			.append($('<tr/>')
+				.addClass('calc-row')
 				.append($('<td/>').text(percent + '%'))
 				.append($('<td/>').text(Math.round(volume * 10) / 10 + ' mL'))
 				.append($('<td/>').text('$' + cost))
 				.append($('<td/>').text('$' + Math.round(costPerDrink * 100) / 100))
 			);
-
-		// Clear out fields
-		percentEl.val('');
-		volumeEl.val('');
-		costEl.val('');
 
 	});
 

@@ -6,66 +6,103 @@
 
 	<title>Calculator</title>
 
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="main.css">
 
 
 </head>
 <body>
 
-	<div class="wrapper">
-		<h1>Cost per standard drink</h1>
+	<section class="row-outer">
+		<div class="row-inner">
 
-		<form id="drink_cost">
+			<h1>Cost per standard drink</h1>
 
-			<input type="radio" name="type" id="type_spirit" value="spirit" checked>
-			<label for="type_spirit">Spirit</label>&nbsp;&nbsp;&nbsp;
+		</div>
+	</section>
 
-			<input type="radio" name="type" id="type_beer" value="beer">
-			<label for="type_beer">Beer</label>&nbsp;&nbsp;&nbsp;
+	<section class="row-outer">
+		<div class="row-inner slim white the-content">
 
-			<input type="radio" name="type" id="type_wine" value="wine">
-			<label for="type_wine">Wine</label>
+			<form id="drink_cost" class="form-standard">
+
+				<p>
+					<label for="proof" class="field-text-reg">
+						<span class="label-text">Alcohol content</span>
+						<input type="text" name="alc-content" id="proof">
+					</label>
+				</p>
+
+				<p>
+					<label for="type-proof" class="field-radio-button">
+						<input type="radio" name="alc-type" id="type-proof" value="proof" checked>
+						<span class="label-text">Proof</span>
+					</label>
+
+					<label for="type-abv" class="field-radio-button">
+						<input type="radio" name="alc-type" id="type-abv" value="abv">
+						<span class="label-text">ABV %</span>
+					</label>
+				</p>
+
+				<p>
+					<label for="volume" class="field-text-reg">
+						<span class="label-text">Volume</span>
+						<input type="number" min="1" maxlength="5" name="volume" id="volume">
+					</label>
+				</p>
+
+				<p>
+					<label for="vol-ml" class="field-radio-button">
+						<input type="radio" name="units" id="vol-ml" value="mL" checked>
+						<span class="label-text">mL</span>
+					</label>
+
+					<label for="vol-oz" class="field-radio-button">
+						<input type="radio" name="units" id="vol-oz" value="oz">
+						<span class="label-text">ounces</span>
+					</label>
+
+				</p>
+
+				<p>
+					<label for="cost">
+						<span class="label-text">Cost ($)</span>
+						<input type="text" name="cost" id="cost">
+					</label>
+				</p>
+
+				<p>
+					<input type="submit" class="button-cta" value="Calculate!">
+				</p>
+
+			</form>
+
+			<h3>Results</h3>
+
+			<p>
+				<span class="js-clear-results button" data-rel="drink-calcs">clear</span>
+			</p>
 
 
-			<label for="proof" class="label_head">Proof</label>
-			<input type="number" min="0" max="200" maxlength="3" name="proof" id="proof" value="80">
+			<table class="table-alt">
 
+				<thead>
+					<tr>
+						<th>Percent</th>
+						<th>Volume</th>
+						<th>Cost</th>
+						<th>Cost per drink</th>
+					</tr>
+				</thead>
 
-			<label for="volume" class="label_head">Volume</label>
-			<input type="number" min="1" maxlength="4" name="volume" id="volume" value="750">
+				<tbody id="drink-calcs">
+					<tr id="js-no-results"><td colspan="4"><em>No results ...</em></td></tr>
+				</tbody>
 
-			<input type="radio" name="units" id="vol_ml" value="mL" checked>
-			<label for="vol_ml">mL</label>&nbsp;&nbsp;&nbsp;
+			</table>
 
-			<input type="radio" name="units" id="vol_oz" value="oz">
-			<label for="vol_oz">ounces</label>&nbsp;&nbsp;&nbsp;
-
-
-			<label for="cost" class="label_head">Cost ($)</label>
-			<input type="text" name="cost" id="cost">
-
-			<br>
-			<input type="submit" class="btn btn-primary" value="Calc">
-		</form>
-
-		<h3>Results <span class="clear_results" data-rel="drink_cost_rows">clear</span></h3>
-
-		<table class="table">
-
-			<thead>
-				<tr>
-					<th>Percent</th>
-					<th>Volume</th>
-					<th>Cost</th>
-					<th>Cost per drink</th>
-				</tr>
-			</thead>
-
-			<tbody id="drink_cost_rows"></tbody>
-
-		</table>
-	</div>
+		</div>
+	</section>
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="calc.js"></script>
